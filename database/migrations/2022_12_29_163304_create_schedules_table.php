@@ -15,6 +15,11 @@ return new class extends Migration
     {
         Schema::create('schedules', function (Blueprint $table) {
             $table->id();
+            $table->string('user_id');
+            $table->string('lect_name');
+            $table->dateTime('date');
+            $table->string('time');
+            $table->string('comment')->nullable();
             $table->timestamps();
         });
     }
