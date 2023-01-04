@@ -14,5 +14,10 @@ class Schedule extends Model
         'date',
         'time',
         'comment',
+        'status',
     ];
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

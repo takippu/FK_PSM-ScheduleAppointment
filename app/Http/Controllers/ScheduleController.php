@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Schedule;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ScheduleController extends Controller
 {
@@ -13,7 +15,11 @@ class ScheduleController extends Controller
      */
     public function index()
     {
-        return view('schedule.index');
+        $getSchedules = Schedule::all();
+
+        return view('schedule.index',[
+            'schedules' => $getSchedules,
+        ]);
     }
 
     /**
@@ -34,7 +40,17 @@ class ScheduleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+               
+                
+                    Schedule::create([
+                        'date' => $request->date,
+                        'time' => $request->time,
+                        'user_id' => auth()->id(),
+                        'status' => $request->status,
+                    ]);   
+                
+
+        return back()->with('message','successcreate');;
     }
 
     /**
@@ -77,8 +93,10 @@ class ScheduleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Schedule $schedule)
     {
-        //
+        $schedule->delete();
+
+        return back()->with('message','successdelete');
     }
 }
