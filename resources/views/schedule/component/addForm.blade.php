@@ -23,7 +23,7 @@
         <div class="input-group mb-3">
           <label class="input-group-text" for="inputGroupSelect01">Time</label>
           <select class="form-select" name="time" id="basic-addon1" required>
-            <option selected>   ...</option>
+            <option   selected>...</option>
             <option value="9.00 AM">9.00 AM</option>
             <option value="10.00 AM">10.00 AM</option>
             <option value="12.00 PM">12.00 PM</option>
@@ -32,7 +32,8 @@
       </div>
       <input type="hidden" value="0" name="status">
       <div class="row justify-content-end">
-        <button type="submit" class="btn btn-primary">Add new </button>
+        <button type="submit" class="btn btn-primary">Add New </button>
+        
       </div>
     </div>
 
