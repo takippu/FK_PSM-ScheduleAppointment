@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Schedule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ScheduleController extends Controller
 {
@@ -41,16 +42,23 @@ class ScheduleController extends Controller
     public function store(Request $request)
     {
                
-                
-                    Schedule::create([
-                        'date' => $request->date,
-                        'time' => $request->time,
-                        'user_id' => auth()->id(),
-                        'status' => $request->status,
-                    ]);   
+       $check = DB::table('schedules')->where('date', $request->date)->exists();
+
+        if($check){
+            return back()->with('message','exists');
+        }else{
+            Schedule::create([
+                'date' => $request->date,
+                'time' => $request->time,
+                'user_id' => auth()->id(),
+                'status' => $request->status,
+            ]);   
+            return back()->with('message','successcreate');
+        }
+
                 
 
-        return back()->with('message','successcreate');;
+
     }
 
     /**

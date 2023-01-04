@@ -5,6 +5,10 @@
   <div class="alert alert-success mt-2" role="alert">
     Successfully created a schedule.
   </div>
+  @elseif(session('message')=='exists')
+  <div class="alert alert-warning" role="alert">
+    The schedule for the date is already exists.
+  </div>
   @endif
     <div class="col">
       <form action="{{route('schedule.store')}}" method="POST" enctype="multipart/form-data">
