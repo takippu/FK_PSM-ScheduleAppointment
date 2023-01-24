@@ -42,16 +42,41 @@
         @endif
       </td>
       <td>
-        <div class="btn-group">
-          <form method="POST" action="{{route('schedule.destroy',$item->id)}}">
-            @csrf
-            @method('DELETE') 
-          <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-          </form>
-          @include('schedule.component.editModal')
-          <button type="button" class="btn btn-info btn-sm ml-2" data-toggle="modal" data-target="#editForm">Edit</button>
+        @if ($item->status == 0)
+          <div class="btn-group">
+            <form method="POST" action="{{route('schedule.destroy',$item->id)}}">
+              @csrf
+              @method('DELETE') 
+            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+            </form>
+            @include('schedule.component.editModal')
+            <button type="button" class="btn btn-info btn-sm ml-2" data-toggle="modal" data-target="#editForm-{{$item->id}}">Edit</button>
 
           </div>
+        @elseif($item->status == 1)
+            <div class="btn-group">
+              <form method="POST" action="{{route('schedule.destroy',$item->id)}}">
+                @csrf
+                @method('DELETE') 
+              <button type="submit" class="btn btn-danger btn-sm" disabled>Delete</button>
+              </form>
+              @include('schedule.component.editModal')
+              <button type="button" class="btn btn-info btn-sm ml-2" data-toggle="modal" data-target="#editForm-{{$item->id}}" disabled>Edit</button>
+
+            </div>
+        @else
+            <div class="btn-group">
+              <form method="POST" action="{{route('schedule.destroy',$item->id)}}">
+                @csrf
+                @method('DELETE') 
+              <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+              </form>
+              @include('schedule.component.editModal')
+              <button type="button" class="btn btn-info btn-sm ml-2" data-toggle="modal" data-target="#editForm-{{$item->id}}">Reschedule</button>
+
+            </div>
+        @endif
+
         
       </td>
 

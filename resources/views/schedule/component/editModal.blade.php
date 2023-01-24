@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div class="modal fade" id="editForm" tabindex="-1" role="dialog" aria-labelledby="editForm" aria-hidden="true">
+<div class="modal fade" id="editForm-{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="editForm-{{$item->id}}" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -33,6 +33,7 @@
               </div>
         </div>
         <div class="modal-footer">
+          <input type="hidden" value="0" name="status">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           <button type="submit" class="btn btn-primary">Save changes</button>
         

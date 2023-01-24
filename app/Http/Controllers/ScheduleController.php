@@ -95,6 +95,7 @@ class ScheduleController extends Controller
         $schedule->update([
             'date' => $request->date,
             'time' => $request->time,
+            'status' => $request->status,
         ]);
         return back()->with('message', 'successedit');
     }
