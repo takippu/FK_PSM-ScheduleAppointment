@@ -3,6 +3,10 @@
   <div class="alert alert-success mt-2" role="alert">
     Successfully deleted a schedule.
   </div>
+  @elseif(session('message')=='successedit')
+  <div class="alert alert-success mt-2" role="alert">
+    Successfully edited a schedule.
+  </div>
   @endif
 <div class="container mt-5">
     <h6> Scheduled Appointments </h6>
@@ -31,16 +35,23 @@
       <td>
         @if ($item->status == 0)
             Pending
-        @else
+        @elseif($item->status == 1)
             Approved
+        @else
+            Rejected
         @endif
       </td>
       <td>
-        <form method="POST" action="{{route('schedule.destroy',$item->id)}}">
-          @csrf
-          @method('DELETE') 
-        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-        </form>
+        <div class="btn-group">
+          <form method="POST" action="{{route('schedule.destroy',$item->id)}}">
+            @csrf
+            @method('DELETE') 
+          <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+          </form>
+          @include('schedule.component.editModal')
+          <button type="button" class="btn btn-info btn-sm ml-2" data-toggle="modal" data-target="#editForm">Edit</button>
+
+          </div>
         
       </td>
 
@@ -53,6 +64,7 @@
     </tbody>
   </table>
 </div>
+
 
 
 

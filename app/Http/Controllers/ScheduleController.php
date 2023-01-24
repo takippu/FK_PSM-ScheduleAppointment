@@ -90,9 +90,13 @@ class ScheduleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Schedule $schedule)
     {
-        //
+        $schedule->update([
+            'date' => $request->date,
+            'time' => $request->time,
+        ]);
+        return back()->with('message', 'successedit');
     }
 
     /**
@@ -106,5 +110,46 @@ class ScheduleController extends Controller
         $schedule->delete();
 
         return back()->with('message','successdelete');
+    }
+
+
+    //tis for sv one
+
+    public function indexReq(){
+        
+        $getSchedules = Schedule::all();
+
+        return view('scheduleReq.index',[
+            'schedules' => $getSchedules,
+        ]);
+    }
+
+    public function acceptSchedule(Request $request, Schedule $schedule){
+        
+        $sche = Schedule::find($request->scheID);
+
+        if($sche){
+            $sche->status = '1';
+            $sche->save();
+            return back()->with('message', 'accepted');
+        }else{
+            return back()->with('message', 'fail');
+        }
+        
+       
+    }
+
+    public function rejectSchedule(Request $request, Schedule $schedule){
+        
+        $sche = Schedule::find($request->scheID);
+
+        if($sche){
+            $sche->status = '2';
+            $sche->save();
+            return back()->with('message', 'rejected');
+        }else{
+            return back()->with('message', 'fail');
+        }
+        
     }
 }

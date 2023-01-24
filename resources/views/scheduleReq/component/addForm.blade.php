@@ -1,5 +1,5 @@
 
-<h2 class="text-center mt-5 border-bottom text-monospace text-weight-bold">Scheduler</h2>
+<h2 class="text-center mt-5 border-bottom text-monospace text-weight-bold">Appointment</h2>
 <div class="container mt-5">
   @if(session('message')=='successcreate')
   <div class="alert alert-success mt-2" role="alert">
@@ -11,12 +11,12 @@
   </div>
   @endif
     <div class="col">
-      <form action="{{route('schedule.store')}}" method="POST" enctype="multipart/form-data">
+      <form action="{{route('schedule.store')}}" method="POST" enctype="multipart/form-data" autocomplete="off">
         @csrf
       <div class="row justify-content-center">
         <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon1">Date</span>
-            <input type="text" name="date" class="date form-control" placeholder="date" aria-label="date" aria-describedby="basic-addon1" required>
+            <input type="text" name="date" class="date form-control" placeholder="date" aria-label="date" aria-describedby="basic-addon1" autocomplete="off" required>
           </div>
       </div>
       <div class="row justify-content-center">
